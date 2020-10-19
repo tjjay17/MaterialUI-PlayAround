@@ -1,0 +1,43 @@
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background:orange; 
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+  }
+
+.header{
+    font-family: 'Dosis', sans-serif;
+    text-align: center;
+    font-size: 60px;
+}
+
+body{
+    /* #74b9ff */
+    background-color:#8c7ae6;
+    margin:0;
+    overflow-y: hidden;
+}
+
+.userInputs{
+    display:flex;
+    flex-direction: column;
+    width:20vw;
+    position:relative;
+    left:10vw;
+    padding:1% 4% 1% 4%;
+    border-radius:10px;
+    /* background-color:#eeecda; */
+}
