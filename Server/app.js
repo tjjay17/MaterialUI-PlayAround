@@ -153,9 +153,9 @@ app.put('/updateGuest/:guest/:food/:first/:last',cors(),(req,res) =>{
             let emailContent = (`Hello There,
                                 <br> 
                                 <br>
-                                Sorry to see that you have cancelled on our event.
+                                This is just a notification/reminder that you updated your entry.
                                 <br>
-                                Feel free to register by October 20th if you change your mind!
+                                Feel free to change anything else by October 20th if you change your mind!
                                 <br>
                                 <br>
                                 Regards,
