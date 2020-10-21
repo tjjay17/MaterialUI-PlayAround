@@ -51,12 +51,13 @@ const UpdateDialog = (props) => {
         }
 
         axios.put('/updateGuest/' + props.Email +'/' + food + '/' + fname + '/' + lname)
-        .then(res =>{
+        .then(response =>{
             axios.get('/allGuests')
                 .then(res => {
                     props.updater(res.data);
                 })
                 .catch(err => console.log(err));
+                return response;
         })
         .catch(err => console.log(err));
 

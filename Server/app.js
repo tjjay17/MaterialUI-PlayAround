@@ -25,9 +25,11 @@ const Guests = mongoose.model('guest',guestSchema);
 
 app.use(bodyParser.json());
 app.use(cors());
-
 //REST API
 //GET route to obtain all the guests information.
+app.get('/',(req,res)=>{
+    res.send('api works!');
+});
 app.get('/allGuests',(req,res)=>{
     Guests.find({},(err,results)=>{
         res.json(results);
@@ -109,30 +111,30 @@ app.delete('/deleteGuest/:guest',(req,res)=>{
                         <br>
                         John TestFace`);
             
-                        const msg = {
-                            to: toDelete, // Change to your recipient
-                            from: 'assignmentsample1999@gmail.com', // Change to your verified sender
-                            subject: 'Sorry to see you cancel!',
-                            text: 'Sorry to see you cancel!',
-                            html: `<p>${emailContent}</p>`
-                          }
-            
-                          sgMail
-                          .send(msg)
-                            .then(() => {
-                                console.log('Email sent');
-                                res.status(201).send('Email sent.')
-                            })
-                            .catch((error) => {
-                                console.log(error);
-                            })
+    const msg = {
+        to: toDelete, // Change to your recipient
+        from: 'assignmentsample1999@gmail.com', // Change to your verified sender
+        subject: 'Sorry to see you cancel!',
+        text: 'Sorry to see you cancel!',
+        html: `<p>${emailContent}</p>`
+        }
+
+        sgMail
+        .send(msg)
+        .then(() => {
+            console.log('Email sent');
+            res.status(201).send('Email sent.')
+        })
+        .catch((error) => {
+            console.log(error);
+        })
         }        
     });
     res.status(201).send('success');
 });
 
 //PUT route to update guest. POST request can be used as well but convention is Put.
-app.put('/updateGuest/:guest/:food/:first/:last',(req,res) =>{
+app.put('/updateGuest/:guest/:food/:first/:last',cors(),(req,res) =>{
     let toUpdate = req.params.guest;
     let food = req.params.food;
     let firstName = req.params.first ;
@@ -149,38 +151,37 @@ app.put('/updateGuest/:guest/:food/:first/:last',(req,res) =>{
             console.log('you got an error',err);
         }else{
             let emailContent = (`Hello There,
-            <br> 
-            <br>
-            Sorry to see that you have cancelled on our event.
-            <br>
-            Feel free to register by October 20th if you change your mind!
-            <br>
-            <br>
-            Regards,
-            <br>
-            John TestFace`);
+                                <br> 
+                                <br>
+                                Sorry to see that you have cancelled on our event.
+                                <br>
+                                Feel free to register by October 20th if you change your mind!
+                                <br>
+                                <br>
+                                Regards,
+                                <br>
+                                John TestFace`);
 
-            const msg = {
-                to: toDelete, // Change to your recipient
-                from: 'assignmentsample1999@gmail.com', // Change to your verified sender
-                subject: 'You Have Updated Your Entry',
-                text: 'You Have Updated Your Entry',
-                html: `<p>${emailContent}</p>`
-              }
+const msg = {
+    to: toUpdate, // Change to your recipient
+    from: 'assignmentsample1999@gmail.com', // Change to your verified sender
+    subject: 'Notification:You Updated Your Entry!',
+    text: 'Notification:You Updated Your Entry!',
+    html: `<p>${emailContent}</p>`
+  }
 
-              sgMail
-              .send(msg)
-                .then(() => {
-                    console.log('Email sent');
-                    res.status(201).send('Email sent.')
-                })
-                .catch((error) => {
-                    console.log(error);
-                })
+  sgMail
+    .send(msg)
+    .then(() => {
+        console.log('Email sent');
+        res.status(201).send('Email sent.')
+    })
+    .catch((error) => {
+        console.log(error);
+    })
             res.status(201).send('Successful');
         }
     });
 });
 
-app.listen(8000||process.env.PORT);
-
+app.listen(8080||process.env.PORT);
